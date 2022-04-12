@@ -1,3 +1,6 @@
+#Don't want to version-control the local configuration file!
+config.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

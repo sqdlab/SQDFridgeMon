@@ -1,0 +1,8 @@
+{
+    "Water Inlet Temperature" : ["Status", "cpatempwi", 1],
+    "Water Outlet Temperature" : ["Status", "cpatempwo", 1],
+    "Oil Temperature" : ["Status", "cpatempo", 1],
+    "P2" : ["maxigauge", "CH2", 3],
+    "P3" : ["maxigauge", "CH3", 3],
+    "P4" : ["maxigauge", "CH4", 3]
+}
