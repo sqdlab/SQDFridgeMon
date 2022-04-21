@@ -1,0 +1,6 @@
+{
+    "Water Inlet Temperature" : "Input Water Temp",
+    "Water Outlet Temperature" : "Output Water Temp",
+    "Oil Temperature" : "Oil Temp",
+    "Pcond" : "PressureM1Condense"
+}

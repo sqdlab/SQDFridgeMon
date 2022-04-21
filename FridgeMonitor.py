@@ -6,6 +6,7 @@ import json
 import pkg_resources
 import numpy as np
 from FridgeParsers.ParserBluFors import ParserBluFors
+from FridgeParsers.ParserOxfordVC import ParserOxfordVC
 
 class FridgeMonitor:
     def __init__(self, config_file_name='config.json'):
@@ -27,11 +28,15 @@ class FridgeMonitor:
         #
         fridge_log_type = data['FridgeType']
         fridge_log_location = data['FridgeLogLocation']
-        assert fridge_log_type == 'BluFors' or fridge_log_type == 'Oxford', "Fridge type must be BluFors or Oxford"
         fridge_config_path = pkg_resources.resource_filename('FridgeConfigs', '')
         fridge_config_path = fridge_config_path.replace('\\','/')+'/'
+        #
         if fridge_log_type == 'BluFors':
             self._fridge_parser = ParserBluFors(fridge_config_path + 'BluFors.json', fridge_log_location)
+        elif fridge_log_type == 'OxfordVC':
+            self._fridge_parser = ParserOxfordVC(fridge_config_path + 'OxfordVC.json', fridge_log_location)
+        else:
+            assert False, f"\'{fridge_log_type}\' is not a supported fridge type."
 
     def send_email(self, subject, message_text):
         msg = MIMEText(message_text)
