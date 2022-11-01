@@ -1,5 +1,50 @@
 # SQDFridgeMon - a Dilution Fridge Monitor with Automated Emails
 
+Currently, this package contains a simplified dashboard that reads files from *SQDFridgeLog* and a separate email script. Note that the suite is not not intended to replace a dedicated dashboard:
+
+- It is intended as a fast unified viewer for all fridge types to help peruse the log history via a fast plotting API (PyQTgraph).
+- It reads the database files written by *SQDFridgeLog*
+- The email alerting software is simplistic and lightweight (can run on the fridge computers; including Windows XP)
+
+An advantage of this suite is that it accompanies *SQDFridgeLog* with a lightweight GUI that does not have database synchronisation issues seen with dashboards using *SQLite3* databases hosted over a network share (e.g. locking issues when issuing multiple queries).
+
+
+## Simple unified dashboard and history viewer
+
+Run `MainDash.py` (requires PySide - similar installation to SQDViz) after adding `configDash.json` to this folder:
+
+```json
+{
+    "BluFors LD":
+    {
+        "DB Filepath" : "C:/Bob/BluForsLD.db",
+        "Display Config" :
+        {
+            "Compressors" :
+            [
+                ["tempWaterInlet", 0, 30], ["tempWaterOutlet", 0, 35], ["tempOil", 0, 30]
+            ],
+            "Pressures" :
+            [
+                ["Povc", 0, 1000], ["Pstill", 0, 1000], ["Pcond", 0, 1000], ["Ppretrap", 0, 1000], ["Ptank", 0, 1000]
+            ],
+            "Temperatures" :
+            [
+                ["tempCold50K", 40, 75], ["tempCold4K", 0, 8], ["tempColdStill", 0.25, 1], ["tempColdMC", 0, 0.1]
+            ]
+        }
+    },
+    "BluFors SD":
+    {
+        ...
+    }
+}
+```
+
+In the above example, the `"Display Config"` key contains columns of plots given as lists. The triplets are given as the parameter name (i.e. database table name), minimum and maximum values over which the colour map is scaled.
+
+## Automated email script
+
 This script monitors the auto-generated fridge logs and emails the users if there are any abnormalities. To setup the script, first pull this repository to have the latest version-controlled script:
 
 ```
